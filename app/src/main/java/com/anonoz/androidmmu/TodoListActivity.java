@@ -20,7 +20,7 @@ public class TodoListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_todo_list);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new TodoListFragment())
                     .commit();
         }
     }
@@ -51,9 +51,9 @@ public class TodoListActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class TodoListFragment extends Fragment {
 
-        public PlaceholderFragment() {
+        public TodoListFragment() {
         }
 
         @Override

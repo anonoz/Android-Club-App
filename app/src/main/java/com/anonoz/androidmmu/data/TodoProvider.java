@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
+
 import com.anonoz.androidmmu.data.TodoContract.*;
 
 public class TodoProvider extends ContentProvider {
@@ -106,6 +108,8 @@ public class TodoProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
+
+        Log.v("Provider.Insert", "Inserted into " + uri.toString() + ": " + values.toString());
 
         return returnUri;
     }

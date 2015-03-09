@@ -109,7 +109,7 @@ public class TodoContract {
     /**
      * HELPER METHODS
      */
-    static long getTodoListIdFromUri(Uri uri) {
+    public static long getTodoListIdFromUri(Uri uri) {
         return Long.parseLong(uri.getPathSegments().get(1));
     }
 }
