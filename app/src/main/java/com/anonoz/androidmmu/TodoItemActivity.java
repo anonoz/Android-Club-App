@@ -14,14 +14,24 @@ import android.os.Build;
 
 public class TodoItemActivity extends ActionBarActivity {
 
+    public static final String ACTIVITY_TITLE = "ACTIVITY_TITLE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_item);
         if (savedInstanceState == null) {
+
+            Bundle args = new Bundle();
+            args.putParcelable(TodoItemFragment.TODO_LIST_ITEMS_URI, getIntent().getData());
+
+            TodoItemFragment todoItemFragment = new TodoItemFragment();
+            todoItemFragment.setArguments(args);
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new TodoItemFragment())
+                    .add(R.id.container_fragment_todoitem, todoItemFragment)
                     .commit();
+
         }
     }
 

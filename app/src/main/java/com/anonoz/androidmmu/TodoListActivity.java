@@ -22,6 +22,7 @@ public class TodoListActivity extends ActionBarActivity
     private final String LOG_TAG = TodoListActivity.class.getSimpleName();
 
     private static final String TODO_LIST_FRAG = "TLFRAG";
+    private static final String TodoItemFragment_TAG = "TIFRAG";
 
     private static boolean mTwoPane = false;
 
@@ -32,15 +33,16 @@ public class TodoListActivity extends ActionBarActivity
 
         TodoListFragment todoListFragment =
                 (TodoListFragment) getSupportFragmentManager().findFragmentById(
-                        R.layout.fragment_todo_list
+                        R.id.fragment_todolist
                 );
 
-        if (findViewById(R.id.todoitems_container) != null) {
+        if (findViewById(R.id.container_fragment_todoitem) != null) {
             mTwoPane = true;
             if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, new TodoListFragment(), TODO_LIST_FRAG)
-                        .commit();
+                getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container, new TodoListFragment(), TODO_LIST_FRAG)
+                    .commit();
             }
         } else {
             mTwoPane = false;
@@ -71,13 +73,31 @@ public class TodoListActivity extends ActionBarActivity
             return true;
         }
 
+        if (id == R.id.action_refresh) {
+            TodoSyncAdapter.syncImmediately(this);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onItemSelected(Uri uri) {
-        Intent intent = new Intent(this, TodoItemActivity.class)
-                .setData(uri);
-        startActivity(intent);
+        if (mTwoPane) {
+            Bundle args = new Bundle();
+            args.putParcelable(TodoItemFragment.TODO_LIST_ITEMS_URI, uri);
+
+            TodoItemFragment fragment  = new TodoItemFragment();
+            fragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment_todoitem,
+                            fragment,
+                            TodoItemFragment_TAG)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, TodoItemActivity.class)
+                    .setData(uri);
+            startActivity(intent);
+        }
     }
 }

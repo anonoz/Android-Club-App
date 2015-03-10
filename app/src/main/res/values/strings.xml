@@ -15,5 +15,6 @@
     <string name="content_authority">com.anonoz.androidmmu</string>
     <string name="sync_account_type">androidmmu.anonoz.com</string>
     <string name="title_activity_todo_item">Android Club TODO Item</string>
+    <string name="action_refresh">Refresh</string>
 
 </resources>

@@ -2,8 +2,11 @@ package com.anonoz.androidmmu;
 
 import android.content.Context;
 import android.text.format.Time;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by anonoz on 3/5/15.
@@ -97,6 +100,23 @@ public class Utility {
         SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMMM dd");
         String monthDayString = monthDayFormat.format(dateInMillis);
         return monthDayString;
+    }
+
+    public static String getHumanisedDateCountdown(Context context, long dateInMillis) {
+        Calendar now = Calendar.getInstance();
+        Calendar target = Calendar.getInstance();
+        target.setTimeInMillis(dateInMillis * 1000);
+
+        Log.d("DateUtility", target.toString());
+        Log.d("DateInMillis", Long.toString(dateInMillis));
+
+        if (target.after(now)) {
+            return ((target.getTimeInMillis() - now.getTimeInMillis()) / 86400000)
+                    + " days left";
+        } else {
+            return ((now.getTimeInMillis() - target.getTimeInMillis()) / 86400000)
+                    + " days ago";
+        }
     }
 
 }

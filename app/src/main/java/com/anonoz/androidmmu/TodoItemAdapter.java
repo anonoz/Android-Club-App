@@ -14,8 +14,8 @@ import android.widget.TextView;
  */
 public class TodoItemAdapter extends CursorAdapter {
 
-    public TodoItemAdapter(Context context, Cursor c) {
-        super(context, c);
+    public TodoItemAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
     }
 
     @Override
@@ -36,9 +36,9 @@ public class TodoItemAdapter extends CursorAdapter {
 
         // Bind values to view
         view_holder.title_view.setText(
-                cursor.getString(TodoListFragment.COLUMN_TITLE));
+                cursor.getString(TodoItemFragment.COLUMN_TITLE));
         view_holder.description_view.setText(
-                Long.toString(cursor.getLong(TodoListFragment.COLUMN_DEADLINE)));
+                cursor.getString(TodoItemFragment.COLUMN_DESCRIPTION));
     }
 
     public static class ViewHolder {

@@ -56,7 +56,9 @@ public class TodoListAdapter extends CursorAdapter {
         view_holder.title_view.setText(
                 cursor.getString(TodoListFragment.COLUMN_TITLE));
         view_holder.deadline_view.setText(
-                Long.toString(cursor.getLong(TodoListFragment.COLUMN_DEADLINE)));
+                Utility.getHumanisedDateCountdown(
+                        root.getContext(),
+                        cursor.getLong(TodoListFragment.COLUMN_DEADLINE)));
     }
 
     public static class ViewHolder {

@@ -20,6 +20,7 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.format.Time;
+import android.util.Log;
 
 /**
  * Defines table and column names for the weather database.
@@ -75,7 +76,9 @@ public class TodoContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LIST;
 
         public static Uri buildTodoListUri(long id) {
-            return ContentUris.withAppendedId(CONTENT_URI, id);
+            Uri uri = ContentUris.withAppendedId(CONTENT_URI, id);
+            Log.v("TodoContract", uri.toString());
+            return uri;
         }
 
 

@@ -147,6 +147,8 @@ public class TodoSyncAdapter extends AbstractThreadedSyncAdapter {
                 String list_title = todo_list.getString(LIST_TITLE);
                 long list_deadline = todo_list.getLong(LIST_DEADLINE);
 
+                Log.d(LOG_TAG, "deadline long = " + Long.toString(list_deadline));
+
                 // Persist todo_list to database
                 ContentValues todo_list_cv = new ContentValues();
                 todo_list_cv.put(LIST_TITLE, list_title);

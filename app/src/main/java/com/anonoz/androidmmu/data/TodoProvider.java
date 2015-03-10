@@ -90,7 +90,7 @@ public class TodoProvider extends ContentProvider {
 
         switch (match) {
             case TODO_LISTS: {
-                normalizeDate(values);
+//                normalizeDate(values);
                 long _id = db.insert(TodoListEntry.TABLE_NAME, null, values);
                 if ( _id > 0 )
                     returnUri = TodoListEntry.buildTodoListUri(_id);
@@ -223,9 +223,9 @@ public class TodoProvider extends ContentProvider {
         String selection = "todo_list_id = ?";
         String[] selectionArgs = new String[]{ todoListId };
 
-        return sTodoListAndItemQueryBuilder.query(
-            db,
-            projection,
+        return db.query(
+            TodoItemEntry.TABLE_NAME,
+            null,
             selection,
             selectionArgs,
             null,
