@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/todo_list_title"
-        android:textSize="48dp"
+        android:textSize="36dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Event Title"
         android:layout_width="match_parent"

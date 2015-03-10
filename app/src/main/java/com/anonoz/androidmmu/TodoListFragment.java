@@ -20,6 +20,8 @@ import android.widget.ListView;
 
 import com.anonoz.androidmmu.data.TodoContract;
 
+import java.util.Calendar;
+
 /**
  * Created by anonoz on 3/5/15.
  */
@@ -65,11 +67,18 @@ public class TodoListFragment extends Fragment
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader called");
 
+        String selection = "deadline > ?";
+        String [] selectionArgs = new String[] {
+            Long.toString(Calendar.getInstance().getTimeInMillis() / 1000) };
+
         String sortOrder = TodoContract.TodoListEntry.COLUMN_DEADLINE + " ASC";
         Uri uri = TodoContract.TodoListEntry.CONTENT_URI;
 
-        return new CursorLoader(getActivity(), uri,
-                                TODO_LISTS_COLUMNS, "1", null,
+        return new CursorLoader(getActivity(),
+                                uri,
+                                TODO_LISTS_COLUMNS,
+                                selection,
+                                selectionArgs,
                                 sortOrder);
     }
 

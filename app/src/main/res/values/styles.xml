@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/material_blue</item>
+        <item name="colorPrimaryDark">@color/material_blue_darker</item>
+    </style>
+
+    <style name="TodoListStyle">
+        <item name="android:choiceMode">singleChoice</item>
     </style>
 
 </resources>

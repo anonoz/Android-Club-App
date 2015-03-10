@@ -129,7 +129,7 @@ public class TodoProvider extends ContentProvider {
 
         switch (sUriMatcher.match(uri)) {
             case TODO_LISTS: {
-                return_cursor = getTodoLists();
+                return_cursor = getTodoLists(selection, selectionArgs, sortOrder);
                 break;
             }
             case TODO_LIST_ITEMS: {
@@ -204,10 +204,10 @@ public class TodoProvider extends ContentProvider {
     /******************
      * All the Getters
      */
-    private Cursor getTodoLists() {
+    private Cursor getTodoLists(String selection, String[] selectionArgs, String sortOrder) {
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
         return db.query(TodoListEntry.TABLE_NAME,
-                null, null, null, null, null, null);
+                null, selection, selectionArgs, null, null, sortOrder);
     }
 
     private Cursor getTodoItems() {

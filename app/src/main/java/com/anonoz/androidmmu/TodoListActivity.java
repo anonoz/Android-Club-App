@@ -41,7 +41,7 @@ public class TodoListActivity extends ActionBarActivity
             if (savedInstanceState == null) {
                 getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new TodoListFragment(), TODO_LIST_FRAG)
+                    .add(R.id.container_fragment_todoitem, new TodoItemFragment(), TodoItemFragment_TAG)
                     .commit();
             }
         } else {
@@ -69,10 +69,6 @@ public class TodoListActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         if (id == R.id.action_refresh) {
             TodoSyncAdapter.syncImmediately(this);
         }

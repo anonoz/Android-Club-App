@@ -40,6 +40,9 @@ public class TodoListAdapter extends CursorAdapter {
         int view_type = getItemViewType(cursor.getPosition());
         int layout_id = R.layout.list_item_todo_list;
 
+        if (view_type == VIEW_TYPE_UPNEXT)
+            layout_id = R.layout.list_item_todo_list_upcoming;
+
         View view = LayoutInflater.from(context).inflate(layout_id, parent, false);
         ViewHolder view_holder = new ViewHolder(view);
         view.setTag(view_holder);
