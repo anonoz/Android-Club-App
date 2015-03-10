@@ -9,7 +9,7 @@ It’s periodically synchronised with the server so they don’t have to open th
 ## Sketches
 
 ### For Phone:
-![Phone Mockups](https://raw.githubusercontent.com/anonoz/Android-Club-App/udacity/mockups/phones.png)
+![Phone Mockups](https://raw.githubusercontent.com/anonoz/Android-Club-App/master/udacity/mockups/phones.png)
 
 ### For Tablet:
-![Phone Mockups](https://raw.githubusercontent.com/anonoz/Android-Club-App/udacity/mockups/tablets.png)
+![Phone Mockups](https://raw.githubusercontent.com/anonoz/Android-Club-App/master/udacity/mockups/tablets.png)
