@@ -1,7 +1,5 @@
 package com.anonoz.androidmmu;
 
-import android.content.Intent;
-import android.content.IntentSender;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,32 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
-import com.anonoz.androidmmu.sync.TodoSyncAdapter;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
-import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
 
-public class MainActivity extends ActionBarActivity {
-
-    private MainFragment mainFragment;
+public class TodoItemActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_todo_item);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment(), "MainFragment")
+                    .add(R.id.container, new TodoItemFragment())
                     .commit();
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_todo_item, menu);
         return true;
     }
 
@@ -57,17 +48,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        if (requestCode == MainFragment.RC_SIGN_IN) {
-            MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
-                    .findFragmentByTag("MainFragment");
-            mainFragment.onActivityResult(requestCode, responseCode, intent);
-        } else {
-            super.onActivityResult(requestCode, responseCode, intent);
-        }
-    }
-
 }
-
-
-

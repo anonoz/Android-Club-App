@@ -2,6 +2,7 @@ package com.anonoz.androidmmu;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,15 @@ import android.widget.TextView;
 /**
  * Created by anonoz on 3/8/15.
  */
-public class TodoAdapter extends CursorAdapter {
+public class TodoListAdapter extends CursorAdapter {
+
+    final String LOG_TAG = TodoListAdapter.class.getSimpleName();
 
     private final int VIEW_TYPE_UPNEXT = 0;
     private final int VIEW_TYPE_QUEUEING = 1;
 
-    public TodoAdapter(Context context, Cursor c, boolean autoRequery) {
-        super(context, c, autoRequery);
+    public TodoListAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
     }
 
     @Override
@@ -35,7 +38,7 @@ public class TodoAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         int view_type = getItemViewType(cursor.getPosition());
-        int layout_id = (view_type == VIEW_TYPE_UPNEXT) ? R.layout.list_item_todo_list_upcoming:R.layout.list_item_todo_list;
+        int layout_id = R.layout.list_item_todo_list;
 
         View view = LayoutInflater.from(context).inflate(layout_id, parent, false);
         ViewHolder view_holder = new ViewHolder(view);
@@ -50,8 +53,10 @@ public class TodoAdapter extends CursorAdapter {
         LinearLayout root = (LinearLayout) view;
 
         // Bind values to view
-        view_holder.title_view.setText("Testing");
-        view_holder.deadline_view.setText("2 days from now.");
+        view_holder.title_view.setText(
+                cursor.getString(TodoListFragment.COLUMN_TITLE));
+        view_holder.deadline_view.setText(
+                Long.toString(cursor.getLong(TodoListFragment.COLUMN_DEADLINE)));
     }
 
     public static class ViewHolder {

@@ -78,6 +78,7 @@ public class TodoContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
+
     }
 
     /* Inner class that defines the table contents of the weather table */

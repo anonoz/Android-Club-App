@@ -1,5 +1,7 @@
 package com.anonoz.androidmmu;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,18 +13,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.anonoz.androidmmu.sync.TodoSyncAdapter;
 
-public class TodoListActivity extends ActionBarActivity {
+
+public class TodoListActivity extends ActionBarActivity
+    implements TodoListFragment.Callback{
+
+    private final String LOG_TAG = TodoListActivity.class.getSimpleName();
+
+    private static final String TODO_LIST_FRAG = "TLFRAG";
+
+    private static boolean mTwoPane = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new TodoListFragment())
-                    .commit();
+
+        TodoListFragment todoListFragment =
+                (TodoListFragment) getSupportFragmentManager().findFragmentById(
+                        R.layout.fragment_todo_list
+                );
+
+        if (findViewById(R.id.todoitems_container) != null) {
+            mTwoPane = true;
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.container, new TodoListFragment(), TODO_LIST_FRAG)
+                        .commit();
+            }
+        } else {
+            mTwoPane = false;
         }
+
+        todoListFragment.setUseUpcomingLayout(mTwoPane);
+
+        TodoSyncAdapter.initializeSyncAdapter(this);
     }
 
 
@@ -48,19 +74,10 @@ public class TodoListActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class TodoListFragment extends Fragment {
-
-        public TodoListFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_todo_list, container, false);
-            return rootView;
-        }
+    @Override
+    public void onItemSelected(Uri uri) {
+        Intent intent = new Intent(this, TodoItemActivity.class)
+                .setData(uri);
+        startActivity(intent);
     }
 }

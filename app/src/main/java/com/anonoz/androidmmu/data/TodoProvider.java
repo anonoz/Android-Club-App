@@ -19,8 +19,9 @@ public class TodoProvider extends ContentProvider {
 
     // URI Matching constants
     static final int TODO_LISTS = 100;
-    static final int TODO_LIST_ITEMS = 102;
+    static final int TODO_LIST  = 101;
     static final int TODO_ITEMS = 200;
+    static final int TODO_LIST_ITEMS = 201;
 
     // Sir you got empty seat? Join table lah.
     private static final SQLiteQueryBuilder sTodoListAndItemQueryBuilder;
@@ -71,6 +72,7 @@ public class TodoProvider extends ContentProvider {
 
         switch (match) {
             case TODO_LISTS:
+            case TODO_LIST:
                 return TodoListEntry.CONTENT_TYPE;
             case TODO_LIST_ITEMS:
             case TODO_ITEMS:
